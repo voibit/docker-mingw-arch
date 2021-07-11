@@ -1,0 +1,122 @@
+diff --git a/gnuradio-runtime/lib/block_gateway_impl.h b/gnuradio-runtime/lib/block_gateway_impl.h
+index e03d45518..cac4f8dec 100644
+--- a/gnuradio-runtime/lib/block_gateway_impl.h
++++ b/gnuradio-runtime/lib/block_gateway_impl.h
+@@ -7,10 +7,13 @@
+  * SPDX-License-Identifier: GPL-3.0-or-later
+  *
+  */
+-
+ #ifndef INCLUDED_RUNTIME_BLOCK_GATEWAY_IMPL_H
+ #define INCLUDED_RUNTIME_BLOCK_GATEWAY_IMPL_H
+ 
++#ifndef _hypot
++	#define _hypot hypot
++#endif
++
+ #include <gnuradio/block_gateway.h>
+ 
+ namespace gr {
+diff --git a/gnuradio-runtime/lib/pmt/CMakeLists.txt b/gnuradio-runtime/lib/pmt/CMakeLists.txt
+index fb36337ea..3fcf85762 100644
+--- a/gnuradio-runtime/lib/pmt/CMakeLists.txt
++++ b/gnuradio-runtime/lib/pmt/CMakeLists.txt
+@@ -41,6 +41,4 @@ if(MSVC)
+     )
+ endif(MSVC)
+ 
+-if(BUILD_SHARED_LIBS)
+   GR_LIBRARY_FOO(gnuradio-pmt)
+-endif()
+diff --git a/gr-analog/lib/CMakeLists.txt b/gr-analog/lib/CMakeLists.txt
+index ec60418b7..24a78dbdf 100644
+--- a/gr-analog/lib/CMakeLists.txt
++++ b/gr-analog/lib/CMakeLists.txt
+@@ -67,9 +67,8 @@ IF(MSVC)
+ 
+ ENDIF(MSVC)
+ 
+-if(BUILD_SHARED_LIBS)
+-    GR_LIBRARY_FOO(gnuradio-analog)
+-endif()
++GR_LIBRARY_FOO(gnuradio-analog)
++
+ 
+ ########################################################################
+ # QA C++ Code for gr-analog
+diff --git a/gr-blocks/lib/CMakeLists.txt b/gr-blocks/lib/CMakeLists.txt
+index cdffc6131..715fec708 100644
+--- a/gr-blocks/lib/CMakeLists.txt
++++ b/gr-blocks/lib/CMakeLists.txt
+@@ -213,12 +213,10 @@ IF(MSVC)
+     )
+ ENDIF(MSVC)
+ 
+-if(BUILD_SHARED_LIBS)
+-    if (SNDFILE_FOUND)
+-        GR_LIBRARY_FOO(gnuradio-blocks SNDFILE)
+-    else()
+-        GR_LIBRARY_FOO(gnuradio-blocks)
+-    endif()
++if (SNDFILE_FOUND)
++    GR_LIBRARY_FOO(gnuradio-blocks SNDFILE)
++else()
++    GR_LIBRARY_FOO(gnuradio-blocks)
+ endif()
+ 
+ ########################################################################
+diff --git a/gr-fft/lib/CMakeLists.txt b/gr-fft/lib/CMakeLists.txt
+index ac6d0986a..d54620363 100644
+--- a/gr-fft/lib/CMakeLists.txt
++++ b/gr-fft/lib/CMakeLists.txt
+@@ -52,9 +52,7 @@ if(MSVC)
+     )
+ endif(MSVC)
+ 
+-if(BUILD_SHARED_LIBS)
+   GR_LIBRARY_FOO(gnuradio-fft FFTW3f)
+-endif()
+ 
+ if(ENABLE_TESTING)
+   include(GrTest)
+diff --git a/gr-qtgui/lib/CMakeLists.txt b/gr-qtgui/lib/CMakeLists.txt
+index 94fbc7b82..2fa7fab5a 100644
+--- a/gr-qtgui/lib/CMakeLists.txt
++++ b/gr-qtgui/lib/CMakeLists.txt
+@@ -155,6 +155,4 @@ if(MSVC)
+ endif(MSVC)
+ 
+ 
+-if(BUILD_SHARED_LIBS)
+-  GR_LIBRARY_FOO(gnuradio-qtgui Qwt Qt5Widgets FFTW3f)
+-endif()
++GR_LIBRARY_FOO(gnuradio-qtgui Qwt Qt5Widgets FFTW3f)
+diff --git a/gr-soapy/lib/CMakeLists.txt b/gr-soapy/lib/CMakeLists.txt
+index 5d82736ad..365efa6d0 100644
+--- a/gr-soapy/lib/CMakeLists.txt
++++ b/gr-soapy/lib/CMakeLists.txt
+@@ -39,9 +39,7 @@ if (MSVC)
+     )
+ endif (MSVC)
+ 
+-if(BUILD_SHARED_LIBS)
+-  GR_LIBRARY_FOO(gnuradio-soapy SoapySDR)
+-endif()
++GR_LIBRARY_FOO(gnuradio-soapy SoapySDR)
+ 
+ if(ENABLE_TESTING)
+   include(GrTest)
+diff --git a/gr-zeromq/lib/CMakeLists.txt b/gr-zeromq/lib/CMakeLists.txt
+index d87a7eefd..c020ede39 100644
+--- a/gr-zeromq/lib/CMakeLists.txt
++++ b/gr-zeromq/lib/CMakeLists.txt
+@@ -52,8 +52,4 @@ if(MSVC)
+     )
+ endif(MSVC)
+ 
+-
+-
+-if(BUILD_SHARED_LIBS)
+-  GR_LIBRARY_FOO(gnuradio-zeromq ZeroMQ)
+-endif()
++GR_LIBRARY_FOO(gnuradio-zeromq ZeroMQ)
